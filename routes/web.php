@@ -1,11 +1,20 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[TestController::class, 'index']);
+
+Route::get('/Storage-session',[TestController::class, 'storagesession']);
+
+Route::get('/delete-Session',[TestController::class, 'deletesession']);
+
+
+
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -17,4 +26,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
