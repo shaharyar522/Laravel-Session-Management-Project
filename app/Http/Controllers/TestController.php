@@ -8,13 +8,23 @@ class TestController extends Controller
 {
     public function index()
     {
-        $value = session()->all();
-        echo "<pre>";
-        print_r($value);
-        echo "</pre>";
+        // $value = session()->all();
+        // echo "<pre>";
+        // print_r($value);
+        // echo "</pre>";
 
         //  $value =  session()->get('name');
         //  echo $value;
+
+        //has method
+
+        if (session()->has('name')) {
+            $value = session()->get('name');
+            echo $value;
+        } else {
+            echo "name key does not exit";
+        }
+
     }
 
     public function storagesession()
@@ -23,11 +33,16 @@ class TestController extends Controller
             'name' => 'Shari',
             'class' => 'BSCS'
         ]);
+
+        session()->increment('count');
         return redirect('/');
     }
 
-    public function deletesession() {
-        session()->forget(['name','class']);
-              return redirect('/');
+    public function deletesession()
+    {
+         // session()->forget(['name','class']);
+        session()->flush();
+        
+        return redirect('/');
     }
 }
